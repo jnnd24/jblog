@@ -61,7 +61,7 @@ public class UserController {
 	//로그인
 	@RequestMapping(value="login",  method= {RequestMethod.GET, RequestMethod.POST})
 	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
-		System.out.println("UserCtrl > login");
+		System.out.println(" UserCtrl > login");
 		
 		UserVo authUser = userService.getUser(userVo);
 		
@@ -72,11 +72,20 @@ public class UserController {
 		
 		if(authUser == null) { // 로그인 실패 시
 			return "redirect:loginForm?result=fail";
-		}else {
+		}else { 				//로그인 성공 시 메인으로 리다이렉트
 			return "redirect:/";
 		}
 		
+	}
+	
+	//로그아웃
+	@RequestMapping(value="logout", method= {RequestMethod.GET, RequestMethod.POST})
+	public String logout(HttpSession session) {
+		System.out.println(" UserCtrl > logout");
 		
+		session.removeAttribute("authUser");
+		
+		return "redirect:/";
 	}
 	
 	

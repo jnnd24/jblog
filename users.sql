@@ -1,11 +1,15 @@
+drop table users;
+drop sequence seq_users_no;
+
 create table users(
     userNo      number,
-    id          varchar2(50)    not null,
+    id          varchar2(50)    not null unique,
     userName    varchar2(100)   not null,
     password    varchar2(50)    not null,
     joinDate    date            not null,
     primary key (userNo)
 );
+
 
 create sequence seq_users_no
 increment by 1
@@ -14,6 +18,7 @@ nocache;
 
 select * 
 from users;
+
 
 select count(id)
 from users
@@ -30,4 +35,6 @@ values(
 );
 
 select userno
-from users;
+from users
+where id = 'aaaa'
+and password = '1234';

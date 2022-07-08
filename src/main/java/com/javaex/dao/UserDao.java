@@ -33,6 +33,7 @@ public class UserDao {
 	public UserVo getUser(UserVo userVo) {
 		
 		UserVo authUser = sqlSession.selectOne("users.getUser", userVo);
+		System.out.println(authUser);
 		
 		return authUser;
 	}
