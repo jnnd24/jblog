@@ -30,4 +30,11 @@ public class BlogService {
 		
 		return authBlog;
 	}
+	
+	//기본정보 수정하기
+	public int basicModify(BlogVo blogVo) {
+		System.out.println(" BlogService > basicModify");
+		
+		return blogDao.basicModify(blogVo);
+	}
 }

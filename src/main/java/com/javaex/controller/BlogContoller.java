@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,8 +48,19 @@ public class BlogContoller {
 		return "blog/admin/blog-admin-basic";
 	}
 	
+	//기본설정 변경
+	@RequestMapping(value="admin/basicModify", method= {RequestMethod.GET, RequestMethod.POST})
+	public String basicModify(@ModelAttribute BlogVo blogVo) {
+		System.out.println(" BlogCtrl > basicModify");
+		
+		blogService.basicModify(blogVo);
+		
+		return "redirect:/{id}";
+	}
+	
+	
 	@RequestMapping(value="admin/category", method= {RequestMethod.GET, RequestMethod.POST})
-	public String category() {
+	public String category(@PathVariable("id")String id) {
 		System.out.println(" BlogCtrl > admin/category");
 		
 		return "blog/admin/blog-admin-cate";

@@ -30,5 +30,12 @@ public class BlogDao {
 		
 		return authBlog;
 	}
+	
+	//기본정보 수정하기
+	public int basicModify(BlogVo blogVo) {
+		System.out.println(" BlogDao > basicModify");
+		
+		return sqlSession.update("blog.basicModify", blogVo);
+	}
 
 }
