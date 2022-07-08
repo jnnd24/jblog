@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BlogService;
 import com.javaex.vo.BlogVo;
@@ -50,10 +52,11 @@ public class BlogContoller {
 	
 	//기본설정 변경
 	@RequestMapping(value="admin/basicModify", method= {RequestMethod.GET, RequestMethod.POST})
-	public String basicModify(@ModelAttribute BlogVo blogVo) {
+	public String basicModify(@RequestParam("blogTitle")String blogTitle
+								,@RequestParam(value="file", required = false, defaultValue = "") MultipartFile file) {
 		System.out.println(" BlogCtrl > basicModify");
 		
-		blogService.basicModify(blogVo);
+		blogService.basicModify(blogTitle, file);
 		
 		return "redirect:/{id}";
 	}
