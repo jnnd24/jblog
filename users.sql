@@ -19,6 +19,10 @@ nocache;
 select * 
 from users;
 
+delete users
+where userno > 2;
+
+
 
 select count(id)
 from users
@@ -38,3 +42,33 @@ select userno
 from users
 where id = 'aaaa'
 and password = '1234';
+
+-----------blog
+drop table blog;
+
+create table blog(
+    id      varchar2(50),
+    blogTitle   varchar2(200) not null,
+    logoFile    varchar2(200),
+    primary key (id),
+    CONSTRAINT blog_fk foreign key (id)
+    references users(id)
+);
+
+select *
+from blog;
+
+insert into blog
+values(
+    'aaaa',
+    '성찬의 블로그입니다.',
+    null
+);
+
+select id
+        ,blogtitle
+        ,logofile
+from blog
+where id = 'aaaa';
+
+-------category

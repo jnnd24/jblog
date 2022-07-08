@@ -44,6 +44,7 @@ public class UserController {
 	public String join(@ModelAttribute UserVo userVo) {
 		System.out.println(" UserCtrl > join");
 		
+		//계정 생성
 		userService.join(userVo);
 		
 		return "user/joinSuccess";
