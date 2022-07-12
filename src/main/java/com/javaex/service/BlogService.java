@@ -40,11 +40,18 @@ public class BlogService {
 	
 	
 	//기본정보 수정하기
-	public int basicModify(String blogTitle, MultipartFile file) {
+	public int basicModify(String id, String blogTitle, MultipartFile file) {
 		System.out.println(" BlogService > basicModify");
 		
+		BlogVo blogVo = new BlogVo();
+		blogVo.setId(id);
+		blogVo.setBlogTitle(blogTitle);
+		
+		
+		
+		//사진이있는 경우 사진변경
 		if(file != null) {
-			System.out.println("file != null");
+			System.out.println("사진있을 때");
 			//파일이름
 			String orgName = file.getOriginalFilename();
 			
@@ -63,6 +70,9 @@ public class BlogService {
 			//파일전체경로
 			String filepath = saveDir + "\\" + saveName;
 			
+			//쿼리에 이름넣기
+			blogVo.setLogoFile(saveName);
+			
 			//파일 저장하기
 			try {
 				byte[] filedata = file.getBytes();
@@ -76,10 +86,11 @@ public class BlogService {
 				e.printStackTrace();
 			}
 			
-			blogDao.basicModify(blogVo);
+		}else{
+			System.out.println("사진없을때");
 		}
 		
-		
+		blogDao.basicModify(blogVo);
 		
 		return 1;
 	}

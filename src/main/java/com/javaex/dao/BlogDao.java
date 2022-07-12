@@ -35,7 +35,11 @@ public class BlogDao {
 	public int basicModify(BlogVo blogVo) {
 		System.out.println(" BlogDao > basicModify");
 		
-		return sqlSession.update("blog.basicModify", blogVo);
+		System.out.println(blogVo);
+		sqlSession.update("blog.basicModify2", blogVo);
+		System.out.println("파일,이름수정완료");
+		
+		return 1;
 	}
 
 }

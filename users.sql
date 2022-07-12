@@ -71,4 +71,47 @@ select id
 from blog
 where id = 'aaaa';
 
+update blog
+set blogTitle = '성찬블로그 수정입니다',
+logofile = '16575054778210ab4f693-87be-4afa-9037-296dc3d5c920.jpg'
+where id = 'aaaa';
+
 -------category
+drop table category;
+
+create table category(
+    cateNo      number,
+    id          varchar2(50),
+    cateName    varchar2(200)   not null,
+    description varchar2(500),
+    regDate     date            not null,
+    primary key (cateNo),
+    constraint category_fk foreign key (id)
+    references blog (id)
+);
+
+create sequence seq_category_no
+increment by 1
+start with 1
+nocache;
+
+select * 
+from category;
+
+insert into category
+values(
+    seq_category_no.nextval,
+    'aaaa',
+    '미분류',
+    '기본으로 만들어지는 카테고리입니다.',
+    sysdate
+);
+
+
+select cateno
+        ,id
+        ,catename
+        ,description
+        ,regdate
+from category
+where id = 'aaaa';

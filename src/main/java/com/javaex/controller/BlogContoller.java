@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,21 +51,21 @@ public class BlogContoller {
 	
 	//기본설정 변경
 	@RequestMapping(value="admin/basicModify", method= {RequestMethod.GET, RequestMethod.POST})
-	public String basicModify(@RequestParam("blogTitle")String blogTitle
-								,@RequestParam(value="file", required = false, defaultValue = "") MultipartFile file) {
+	public String basicModify(@PathVariable("id")String id
+							,@RequestParam("blogTitle") String blogTitle
+							,@RequestParam(value = "file") MultipartFile file) {
 		System.out.println(" BlogCtrl > basicModify");
 		
-		blogService.basicModify(blogTitle, file);
+		if(file == null) {
+			System.out.println("없음");
+		}else {
+			System.out.println("사진잇음");
+		}
+		blogService.basicModify(id, blogTitle, file);
 		
 		return "redirect:/{id}";
 	}
 	
 	
-	@RequestMapping(value="admin/category", method= {RequestMethod.GET, RequestMethod.POST})
-	public String category(@PathVariable("id")String id) {
-		System.out.println(" BlogCtrl > admin/category");
-		
-		return "blog/admin/blog-admin-cate";
-	}
 
 }
