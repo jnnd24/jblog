@@ -33,7 +33,7 @@
 		      		</tr>
 		      		<tr>
 		      			<td></td>
-		      			<td id="tdMsg" colspan="2">사용할 수 있는 아이디 입니다.</td>
+		      			<td id="tdMsg" colspan="2"><!-- 사용할 수 있는 아이디 입니다. --></td>
 		      		</tr> 
 		      		<tr>
 		      			<td><label for="txtPassword">패스워드</label> </td>
@@ -69,34 +69,50 @@
 
 </body>
 <script type="text/javascript">
+	
+	/* 회원가입버튼 클릭 시 체크 */	
+	$("#btnJoin").on("click", function(){
+		console.log("회원가입 클릭");
+	});
+	
+	/*//회원가입버튼 클릭 시 체크 //*/
+	
+	
+	
+	
+	/* 아이디 중복체크 */
 	$("#btnIdCheck").on("click", function(){
 		
 		//입력한 아이디값 정의
 		var id = $("#txtId").val();
 		console.log(id);
 		
+		userVo = { id: id}
+		
 		$.ajax({
 			
 			url : "${pageContext.request.contextPath }/user/idcheck",		
 			type : "get",
-			contentType : "application/json",
-			data : {"id" : id},
+			//contentType : "application/json",
+			data : userVo,
 
-			dataType : "json",
+			//dataType : "json",
 			success : function(result){
 				/*성공시 처리해야될 코드 작성*/
 				if(result === 'ok'){
 					console.log("ok");
+					$("#tdMsg").html("사용할 수 있는 아이디 입니다.").css("color","blue");
 				}else{
 					console.log("no");
+					$("#tdMsg").html("다른 아이디로 가입해 주세요.").css("color","red");
 				}
 			},
 			error : function(XHR, status, error) {
 				console.error(status + " : " + error);
 			}
 		});
-		
 	});
+	/*//아이디 중복체크 //*/
 </script>
 
 
