@@ -96,7 +96,8 @@ start with 1
 nocache;
 
 select * 
-from category;
+from category
+order by cateno desc;
 
 insert into category
 values(
@@ -115,3 +116,115 @@ select cateno
         ,regdate
 from category
 where id = 'aaaa';
+
+-------post
+drop table post;
+create table post(
+    postNo      number,
+    cateNo      number,
+    postTitle   varchar2(300)   not null,
+    postContent varchar2(4000),
+    regDate     date    not null,
+    primary key (postNo),
+    constraint post_fk foreign key (cateNo)
+    references category(cateNo)
+);
+
+create sequence seq_post_no
+increment by 1
+start with 1
+nocache;
+
+select *
+from post;
+
+insert into post
+values (
+    seq_post_no.nextval,
+    2,
+    '포트스타이틀',
+    '게시판내용내용내용',
+    sysdate
+);
+
+
+select postNo
+        ,cateNo
+        ,postTitle
+        ,postContent
+        ,regDate
+from post;
+
+--카테고리 내 게시물제목 출력
+select postTitle
+        ,regDate
+        ,cateNo
+        ,postNo
+from post
+where cateNo = 2
+order by postNo desc;
+
+--최근글 하나만 불러오기
+select postNo
+        ,postTitle
+        ,postContent
+        ,regDate
+        ,rownum rn
+from post
+where cateNo = 0
+order by postNo desc
+;
+
+select postNo
+        ,postTitle
+        ,postContent
+        ,regDate
+        ,rn
+from (  select postNo
+                ,postTitle
+                ,postContent
+                ,regDate
+                ,rownum rn
+        from post
+        where cateNo = 2
+        order by postNo desc
+        )
+where rn = 1
+;
+
+--게시물 불러오기
+select postTitle
+        ,postContent
+        ,regDate
+from post
+where postNo = 7
+;
+
+
+
+
+-------comments
+drop table comments;
+create table comments(
+    cmtNo       number,
+    postNo      number,
+    userNo      number,
+    cmtContent  varchar2(1000) not null,
+    regDate     date    not null,
+    primary key (cmtNo),
+    constraint comments_fk foreign key (userNo)
+    references users(userNo)
+);
+
+create sequence seq_comments_no
+increment by 1
+start with 1
+nocache;
+
+
+
+
+
+
+
+

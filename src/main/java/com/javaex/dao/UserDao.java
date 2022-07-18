@@ -38,4 +38,12 @@ public class UserDao {
 		return authUser;
 	}
 	
+
+	//아이디로 블로그주인 정보 불러오기
+	public UserVo getUser(String id) {
+		
+		UserVo authUser = sqlSession.selectOne("users.getBlogUser", id);
+		
+		return authUser;
+	}
 }

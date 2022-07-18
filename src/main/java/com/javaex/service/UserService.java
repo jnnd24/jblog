@@ -77,4 +77,13 @@ public class UserService {
 		
 		return authUser;
 	}
+	
+	//아이디로 블로그주인 정보 불러오기
+	public UserVo getUser(String id) {
+		System.out.println(" UserService > getUser");
+		
+		UserVo authUser = userDao.getUser(id);
+		
+		return authUser;
+	}
 }
