@@ -51,6 +51,12 @@
 			<div id="post_area">
 				
 				<div id="postBox" class="clearfix">
+					<!-- 최초접속 시 최신글노출 -->
+					<c:if test="${param.postNo == null && param.cateNo == null}">
+						<div id="postTitle" class="text-left"><strong>${getRecentPost.postTitle }</strong></div>
+						<div id="postDate" class="text-left"><strong>${getRecentPost.regDate }</strong></div>
+					</c:if>
+					<!-- //최초접속 시 최신글노출 -->
 					<!-- 게시물선택 안된 경우 -->
 					<c:if test="${param.postNo == null}">
 						<div id="postTitle" class="text-left"><strong>${mainPost.postTitle }</strong></div>
@@ -68,6 +74,11 @@
 				<!-- //postBox -->
 			
 				<div id="post">
+					<!-- 최초접속 시 최신글노출 -->
+					<c:if test="${param.postNo == null && param.cateNo == null}">
+						${getRecentPost.postContent }
+					</c:if>
+					<!-- //최초접속 시 최신글노출 -->
 					<!-- 게시물선택 안된 경우 -->
 					<c:if test="${param.postNo == null}">
 						${mainPost.postContent }

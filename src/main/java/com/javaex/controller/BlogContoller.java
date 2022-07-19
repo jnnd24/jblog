@@ -71,6 +71,12 @@ public class BlogContoller {
 		model.addAttribute("getPost", getPost);
 		System.out.println(getPost);
 		
+		//가장 최신 게시물 불러와서 메인에 띄우기
+		PostVo getRecentPost = postService.getRecentPost(id);
+		model.addAttribute("getRecentPost", getRecentPost);
+		System.out.println(getRecentPost);
+		
+		
 		return "blog/blog-main";
 	}
 	

@@ -50,4 +50,17 @@ public class PostService {
 		return getPost;
 	}
 	
+	//최신게시물 불러오기
+	public PostVo getRecentPost(String id) {
+		System.out.println(" PostService > getRecentPost");
+		
+		//최신글의 postno구하기
+		int rePostNo = postDao.getRecentPostNo(id);
+		
+		//게시물 불러오기
+		PostVo rePost = postDao.getPost(rePostNo);
+		
+		return rePost;
+	}
+	
 }

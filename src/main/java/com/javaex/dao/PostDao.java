@@ -47,4 +47,23 @@ public class PostDao {
 		return getPost;
 	}
 	
+	
+	//최신게시물 불러오기
+	public PostVo getRecentPost(String id) {
+		System.out.println(" PostDao > getPost");
+		
+		PostVo getRecentPost = sqlSession.selectOne("post.getRecentPost", id);
+		
+		return getRecentPost;
+	}
+	
+	
+	//최신글의 postNo 구하기
+	public int getRecentPostNo(String id) {
+		System.out.println(" PostDao > getRecentPostNo");
+		
+		int rePostNo = sqlSession.selectOne("post.getRecentPostNo", id);
+		
+		return rePostNo;
+	}
 }

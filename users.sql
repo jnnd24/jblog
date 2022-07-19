@@ -171,7 +171,7 @@ select postNo
         ,regDate
         ,rownum rn
 from post
-where cateNo = 0
+where cateNo = 2
 order by postNo desc
 ;
 
@@ -222,7 +222,13 @@ start with 1
 nocache;
 
 
-
+-----------------------id별 최신글 불러와서 그 카테고리 찾기
+--아이디의 최신글 postno불러오기
+select max(postNo)
+from post p, category c
+where p.cateNo = c.cateNo
+and c.id = 'aaaa'
+;
 
 
 

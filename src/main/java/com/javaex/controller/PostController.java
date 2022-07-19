@@ -59,7 +59,6 @@ public class PostController {
 	
 	
 	//카테고리 내 게시물 리스트
-	@ResponseBody
 	@RequestMapping(value="postListCate")
 	public List<PostVo> postListCate(@RequestParam("cateNo")int cateNo) {
 		System.out.println(" PostCtrl > postListCate");
@@ -69,6 +68,13 @@ public class PostController {
 		
 		
 		return postListCate;
+	}
+	
+	
+	//아이디 내 최신게시물 가져오기
+	@RequestMapping(value="getRecentPost")
+	public String getRecentPost() {
+		
 	}
 
 }
